@@ -135,21 +135,19 @@ console.log(setToArray(new Set([1, 2, 3, "b", "a", "c"])));
  * arr - Масив, з якого потрібно видалити дублікати.
  */
 function removeDuplicatesInPlace(arr) { 
-  var seen = {};
-  var count = 0;
-
-  for( var  i = 0; i < arr.length - count ; i++) {
-    arr[i] = arr[i+count];
-
-    if( seen[arr[i]] ) {
-      count++;
-      arr[i] = arr[i+count];
+  let uniqueSet = new Set();
+  
+  for( let  i = 0; i < arr.length; i++) {
+    
+    if( uniqueSet.has([arr[i]])) {
+      arr.splise(i, 1);
       i--;
-    }
-    seen[arr[i]]=true;
+    } else { 
+      uniqueSet.add(arr[i]);
+     }
   }
 
-  arr.length = arr.length - count; return seen;
+  return uniqueSet;
 }
 
   // Створення множини для збереження унікальних елементів
@@ -276,7 +274,7 @@ iterateSet(new Set(["a", "b", "c"]));
  * Повертаємо - Суму числових елементів у множині.
  */
 function sumNumbers(set) { var total = 0; set.forEach((arg)=>{if(typeof arg === "number")
-{total += arg; console.log(total);}}) 
+{total += arg;} }); return total;
   
   // Перевірка, чи є елемент числом
   // Додавання числового елемента до суми
